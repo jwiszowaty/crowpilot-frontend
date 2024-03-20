@@ -1,41 +1,45 @@
-import { StyleSheet, Text, Button, View, Image, Dimensions, Animated } from 'react-native';
+import { StyleSheet, Text, Button, View, Image, Dimensions, Animated, Pressable } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignUp from './SignUp.js'
+import SignUp from './SignUp.js';
 import LogIn from './LogIn.js';
 import { Video } from 'expo-av';
-
+import wind from '../styles.js'
 const dimensions = Dimensions.get('screen')
 const idealHW = (dimensions.width * 0.8)
 
 function Welcome({ navigation }) {
-        return (
-        <View style={styles.container}>
-        <Video
-        style = {styles.video}
-        rate = {1}
-        source={require('../assets/flightvideo.mp4')}
-        useNativeControls={false}
-        resizeMode="cover"
-        isLooping
-        isMuted
-        shouldPlay
-      />
-        <Image source = {require('../assets/Crowpilot_text.png')} alt = "Crowpilot logo" style = {{"width": idealHW, "height": idealHW, "resizeMode": "contain", "margin": 20}}></Image>
-        <Text>Welcome!</Text>
-        <Button
-            title="Sign up"
-            onPress={() =>
-            navigation.navigate("SignUp")
-            }
-        />
-        <View style = {styles.between}></View>
-        <Button
-            title="Log in"
-            onPress={() =>
-            navigation.navigate("LogIn")
-            }
-        />
-        </View>
+    return (
+        <>
+            <Video
+            style = {styles.video}
+            rate = {1}
+            source={require('../assets/airportview.mp4')}
+            useNativeControls={false}
+            resizeMode="cover"
+            isLooping
+            isMuted
+            shouldPlay
+            />
+            <Image source = {require('../assets/Crowpilot_text.png')} alt = "Crowpilot logo" style = {{"width": idealHW, "height": 150, "resizeMode": "contain", "margin": 20}}></Image>
+            <Text>Broaden your horizons</Text>
+            <View className={wind.container}>
+                <Pressable
+                    className={wind.button}
+                    onPress={() => navigation.navigate("SignUp")}
+                >
+                    <View className={wind.container}>
+                        <Text className={wind.textButtonLight}>Sign up</Text>
+                    </View>
+                </Pressable>
+                 <View style = {wind.between}></View>
+                <Pressable
+                    className={wind.button}
+                    onPress={() =>navigation.navigate("LogIn")}
+                >
+                    <Text className={wind.textButtonLight}>Log in</Text>
+                </Pressable>
+            </View>
+        </>
     );
 }
 
@@ -51,12 +55,6 @@ export default function AuthNavigation() {
     );
 }
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     between: {
         padding: 10
     },
